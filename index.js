@@ -6,7 +6,7 @@ import routers from './routes/index.js';
 dotenv.config();
 var app = express()
 var port=process.env.PORT ||5000
-var url =process.env.CYCLIC_DB
+var CYCLIC_DB =process.env.URI
 
 // import bodyParser from 'body-parser' 
 
@@ -31,7 +31,7 @@ routers(app)
 
 
 mongoose
-  .connect( url, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect( CYCLIC_DB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to DB');
     app.listen(port, () => {
