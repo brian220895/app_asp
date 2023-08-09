@@ -6,8 +6,9 @@ import routers from './routes/index.js';
 dotenv.config();
 var app = express()
 var PORT=process.env.PORT ||5000
+var URI =process.env.URI
 
-import bodyParser from 'body-parser' 
+// import bodyParser from 'body-parser' 
 
 // app.use(cors());
 // app.use(express.json({ limit: '30mb' }));
@@ -24,7 +25,7 @@ routers(app)
 // app.use('/posts', posts);
 
 mongoose
-  .connect('mongodb+srv://trmthanh220895:d2zi3piX30pKVXpx@cluster05072023.8wowfby.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to DB');
     app.listen(PORT, () => {
