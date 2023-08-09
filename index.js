@@ -5,8 +5,7 @@ import mongoose from 'mongoose'
 import routers from './routes/index.js';
 dotenv.config();
 var app = express()
-var PORT=process.env.PORT
-var URI =process.env.URI
+var PORT=process.env.PORT ||5000
 
 import bodyParser from 'body-parser' 
 
@@ -25,7 +24,7 @@ routers(app)
 // app.use('/posts', posts);
 
 mongoose
-  .connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect('mongodb+srv://trmthanh220895:d2zi3piX30pKVXpx@cluster05072023.8wowfby.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to DB');
     app.listen(PORT, () => {
