@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true, limit: '30mb' }));
 // app.use('/posts', posts);
 
 app.get('/posts',(req,res)=>{
-  res.json('asdasdsdsa')
+  res.json(URI)
 })
 
 mongoose
