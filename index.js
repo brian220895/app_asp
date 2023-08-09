@@ -1,24 +1,24 @@
 import express from 'express'
 import cors from 'cors'
-import dotenv from 'dotenv'
+// import dotenv from 'dotenv'
 // import mongoose from 'mongoose'
 // import routers from './routes/index.js';
-dotenv.config();
+// dotenv.config();
 var app = express()
-var PORT=process.env.PORT
-var URI =process.env.URI
+var PORT=process.env.PORT ||5000
+// var URI =process.env.URI
 
 // import bodyParser from 'body-parser' 
 
-app.use(cors());
-app.use(express.json({ limit: '30mb' }));
-app.use(express.urlencoded({ extended: true, limit: '30mb' }));
+// app.use(cors());
+// app.use(express.json({ limit: '30mb' }));
+// app.use(express.urlencoded({ extended: true, limit: '30mb' }));
 
 
 
-app.use(cors());
-app.use(express.json({ limit: '30mb' }));
-app.use(express.urlencoded({ extended: true, limit: '30mb' }));
+// app.use(cors());
+// app.use(express.json({ limit: '30mb' }));
+// app.use(express.urlencoded({ extended: true, limit: '30mb' }));
 
 // routers(app)
 
