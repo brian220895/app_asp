@@ -24,19 +24,25 @@ app.use(express.urlencoded({ extended: true, limit: '30mb' }));
 routers(app)
 // app.use('/posts', posts);
 
-mongoose
-  .connect('mongodb+srv://trmthanh220895:d2zi3piX30pKVXpx@cluster05072023.8wowfby.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    console.log('Connected to DB');
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
-  })
-  .catch((err) => {
-    console.log('err', err);
+app.get('/posts',(req,res)=>{
+  res.json('asdasdsdsa')
+})
+
+// mongoose
+//   .connect('mongodb+srv://trmthanh220895:d2zi3piX30pKVXpx@cluster05072023.8wowfby.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+//   .then(() => {
+//     console.log('Connected to DB');
+//     app.listen(PORT, () => {
+//       console.log(`Server is running on port ${PORT}`);
+//     });
+//   })
+//   .catch((err) => {
+//     console.log('err', err);
+//   });
+
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
   });
-
-
 
 
 // app.listen(port, ()=>{
