@@ -31,7 +31,7 @@ routers(app)
 
 
 mongoose
-  .connect(`${url}`, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect( url || "mongodb+srv://trmthanh220895:d2zi3piX30pKVXpx@cluster05072023.8wowfby.mongodb.net/?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to DB');
     app.listen(port, () => {
