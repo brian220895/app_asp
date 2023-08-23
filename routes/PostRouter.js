@@ -5,14 +5,16 @@ const router = express.Router()
 
 import * as PostController from "../controllers/PostController.js";
 
-router.get('/', PostController.getPost)
+
+
+router.get('/', PostController.getAllPost)
+
 
 router.post('/', PostController.createPost)
 
 router.put('/update/:_id', PostController.updatePost)
 
 router.delete('/delete/:_id',PostController.deletePost)
-
 
 
 export default router;
