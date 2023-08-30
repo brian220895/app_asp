@@ -2,35 +2,63 @@ import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 dotenv.config()
 
-export const authMiddleWare = (req, res, next) => {
-    const token = req.headers.token
-    jwt.verify(token, process.env.ACCESS_TOKEN, function (err, user) {
+
+export const verifyMiddleWare = (req, res, next) => {
+ 
+    if(req.headers.token){
+    //    const accessToken=token.split(" ")[1]
+    const accessToken=req.headers.token
+    // console.log('HEADERS',accessToken)
+       jwt.verify(accessToken, process.env.JWT_ACCESS_KEY, function (err, user) {
         if (err) {
-            return res.status(404).json({
-                message: 'Token is invalid',
-                status: 'ERROR'
-            })
+          return res.status(403).send({ message: "Token is invalid" });
         }
-        if (user?.isAdmin) {
-            next()
-        } else {
-            return res.status(404).json({
-                message: 'The authemtication',
-                status: 'ERROR'
-            })
-        }
-    });
+    
+        next();
+       
+      });
+        
+    }else{
+        return res.status(404).json('The authemtication')
+    }
+   
+}
+
+export const authAdminMiddleWare = (req, res, next) => {
+    // const token = req.headers.token
+   
+    if(req.headers.token){
+
+    //    const accessToken=token.split(" ")[1]
+       const accessToken=req.headers.token
+       console.log('header milddd',accessToken)
+       jwt.verify(accessToken, process.env.JWT_ACCESS_KEY, function (err, user) {
+            if (err) {
+                return res.status(404).json('Token is invalid')
+            }
+            if (user?.isAdmin) {
+                next()
+            } else {
+                return res.status(404).json('The authemtication')
+            }
+        });
+    }else{
+        return res.status(404).json('The authemtication has been provided')
+    }
+   
 }
 
 export const authUserMiddleWare = (req, res, next) => {
-    const token = req.headers.token
+    // const token = req.headers.token
     const userId = req.params._id
-    jwt.verify(token, process.env.ACCESS_TOKEN, function (err, user) {
+    // console.log(userId)
+    // if(token){
+    // const accessToken=token.split(" ")[1]
+    const accessToken=req.headers.token
+
+    jwt.verify(accessToken, process.env.JWT_ACCESS_KEY, function (err, user) {
         if (err) {
-            return res.status(404).json({
-                message: 'Token is invalid',
-                status: 'ERROR'
-            })
+            return res.status(404).json('Token is invalid')
         }
         // console.log(user)
         // {
@@ -43,10 +71,14 @@ export const authUserMiddleWare = (req, res, next) => {
         if (user?.isAdmin || user?.id === userId) {
             next()
         } else {
-            return res.status(404).json({
-                message: 'The authemtication',
-                status: 'ERROR'
-            })
+            return res.status(404).json('The authemtication')
         }
     });
+
+//    }else{
+//         return res.status(404).json('The authemtication')
+//     }
+
+   
+    
 }

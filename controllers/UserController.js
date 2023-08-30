@@ -1,6 +1,12 @@
 import userModel from "../models/UserModel.js";
 import bcrypt from "bcrypt";
-import { genneralAccessToken} from "../services/JwtService.js";
+// import { genneralAccessToken} from "../services/JwtService.js";
+import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+dotenv.config()
+
+
+let refreshTokens=[]
 
 export const createUser = async (req, res) => {
     try {
@@ -40,11 +46,12 @@ export const createUser = async (req, res) => {
             email,
             password: hash
         })
+        // const {...others}=createdUser._doc
         if (createdUser) {
             return res.status(200).json({
                 status: 'OK',
                 message: 'SUCCESS',
-                data: createdUser
+                data:createdUser
             })
         }
 
@@ -58,6 +65,8 @@ export const createUser = async (req, res) => {
 export const getAllUser = async (req, res) => {
     try {
         const allUser = await userModel.find().sort({createdAt: -1, updatedAt: -1})
+        // const {...others}=allUser._doc
+        // console.log(allUser)
         return res.status(200).json({
                 status: 'OK',
                 message: 'Success',
@@ -80,6 +89,8 @@ export const updateUser = async (req, res) => {
 
         const userId = req.params._id
         const data = req.body
+
+      
         const checkUser = await userModel.findOne({
             _id: userId
         })
@@ -89,12 +100,13 @@ export const updateUser = async (req, res) => {
                 message: 'The user is not defined'
             })
         }
-
+  
         const updatedUser = await userModel.findByIdAndUpdate({_id:userId}, data, { new: true })
+        // const {...others}=updatedUser._doc
         return res.status(200).json({
             status: 'OK',
             message: 'SUCCESS',
-            data: updatedUser
+           data:updatedUser
         })
 
     } catch (e) {
@@ -125,10 +137,12 @@ export const deleteUser = async (req, res) => {
             })
         }
 
-        await userModel.findByIdAndDelete(userId)
+        const deletedUser = await userModel.findByIdAndDelete(userId)
+        // const {...others}=deletedUser._doc
         return res.status(200).json({
             status: 'OK',
             message: 'Delete user success',
+            data:deletedUser
         })
 
 
@@ -139,11 +153,24 @@ export const deleteUser = async (req, res) => {
     }
 }
 
+export const generateAccessToken=(checkUser)=>{
+    return jwt.sign({
+        id:checkUser.id,
+        isAdmin:checkUser.isAdmin,
+    }, process.env.JWT_ACCESS_KEY, { expiresIn: '10s' })
+}
 
+export const generateRefreshToken=(checkUser)=>{
+    return jwt.sign({
+        id:checkUser.id,
+        isAdmin:checkUser.isAdmin,
+    }, process.env.JWT_REFRESH_KEY, { expiresIn: '365d' })
+}
 
 export const loginUser = async (req, res) => {
     try {
           const { username, password } = req.body
+     
         if (!username || !password) {
             return res.status(404).json({
                 status: 'ERR',
@@ -154,7 +181,7 @@ export const loginUser = async (req, res) => {
             const checkUser = await userModel.findOne({
                 username: username
             })
-            if (checkUser === null) {
+            if (!checkUser) {
                 return res.status(404).json({
                     status: 'ERR',
                     message: 'The user is not defined'
@@ -168,24 +195,102 @@ export const loginUser = async (req, res) => {
                     message: 'The password or user is incorrect'
                 })
             }
-            const access_token = await genneralAccessToken({
-                id: checkUser.id,
-                isAdmin: checkUser.isAdmin
-            })
-            
-            res.cookie('token', access_token, {
-                httpOnly: true,
-                secure: false,
-                sameSite: 'strict',
-                path: '/',
-            })
 
-            return res.status(200).json({
-                status: 'OK',
-                message: 'SUCCESS',
-                access_token
-            })
+            // const access_token = await genneralAccessToken({
+            //     id: checkUser.id,
+            //     isAdmin: checkUser.isAdmin
+            // })
+         
             
+     
+            if(checkUser && comparePassword){
+              const accessToken = generateAccessToken(checkUser)
+              const refreshToken = generateRefreshToken(checkUser)
+          
+              res.cookie("token", accessToken, {
+                // httpOnly: true,
+                secure:true,
+                path: "/",
+                sameSite: "strict",
+              });
+
+              res.cookie("refreshToken", refreshToken, {
+                // httpOnly: true,
+                secure:false,
+                path: "/",
+                sameSite: "strict",
+              });
+         
+              const {password,...others}=checkUser._doc
+              // console.log(checkUser._doc)
+              return res.status(200).json({
+                  status: 'OK',
+                  message: 'SUCCESS',
+                  accessToken,
+                  ...others
+              })
+            }
+             
+  
+              
+              
+      } catch (e) {
+          return res.status(404).json({
+              message: e
+          })
+      }
+  }
+
+
+  export const requestRefreshToken =(req, res) => {
+    try {
+        const refreshToken = req.cookies.refreshToken
+        // console.log('refreshToken_022222',refreshToken)
+        // console.log('refreshToken',refreshToken)
+    //    if(!refreshToken)  return res.status(401).json('You are not authenticated')
+    //    if(!refreshTokens.includes(refreshToken)){
+    //     return res.status(403).json("Refresh token is not valid")
+    //    }
+       jwt.verify(refreshToken, process.env.JWT_REFRESH_KEY, function (err, user) {
+        if (err) {
+            return res.status(404).json('Token is invalid')
+            // console.log(err)
+        }
+        // refreshTokens = refreshTokens.filter((token)=>token !==refreshToken)
+        // const newAccessToken= generateRefreshToken(user)
+        const newAccessToken=generateAccessToken(user)
+        const newRefreshToken=generateRefreshToken(user)
+        // refreshTokens.push(newRefreshToken)
+        
+        res.cookie('token', newAccessToken, {
+            // httpOnly: true,
+            secure: false,
+            sameSite: 'strict',
+            path: '/',
+        })
+        res.cookie('refreshToken', newRefreshToken, {
+            // httpOnly: true,
+            secure: false,
+            sameSite: 'strict',
+            path: '/',
+        })
+        return res.status(200).json({
+            status: 'OK',
+            message: 'SUCCESS',
+            accessToken:newAccessToken,
+            refreshToken:newRefreshToken
+        })
+        // console.log(user)
+        // {
+        //     id: '64e5c73c63068380d6576094',
+        //     isAdmin: false,
+        //     iat: 1692789058,
+        //     exp: 1692789118
+        //   }
+
+      
+    });
+
     } catch (e) {
         return res.status(404).json({
             message: e
@@ -193,23 +298,56 @@ export const loginUser = async (req, res) => {
     }
 }
 
-// export const getDetailsUser = async (req, res) => {
-//     try {
-//         const userId = req.params._id
-//         if (!userId) {
-//             return res.status(200).json({
-//                 status: 'ERR',
-//                 message: 'The userId is required'
-//             })
-//         }
-//         const response = await UserService.getDetailsUser(userId)
-//         return res.status(200).json(response)
-//     } catch (e) {
-//         return res.status(404).json({
-//             message: e
-//         })
-//     }
-// }
+
+export const logoutUser = async (req, res) => {
+    try {
+        res.clearCookie('token')
+        res.clearCookie('refreshToken')
+        return res.status(200).json({
+            status: 'OK',
+            message: 'Logout successfully'
+        })
+    } catch (e) {
+        return res.status(404).json({
+            message: e
+        })
+    }
+}
+
+
+
+
+export const getDetailUser = async (req, res) => {
+    try {
+        const userId = req.params._id
+        if (!userId) {
+            return res.status(200).json({
+                status: 'ERR',
+                message: 'The userId is required'
+            })
+        }
+
+         const checkUser = await userModel.findOne({
+                _id: userId
+            })
+            if (checkUser === null) {
+                return res.status(404).json({
+                    status: 'ERR',
+                    message: 'The user is not defined'
+                })
+            }
+        const {password,...others}=checkUser._doc
+        return res.status(200).json({
+                            status: 'OK',
+                            message: 'SUCESS',
+                            ...others
+                        })
+    } catch (e) {
+        return res.status(404).json({
+            message: e
+        })
+    }
+}
 
 
 // const deleteMany = async (req, res) => {
@@ -250,16 +388,3 @@ export const loginUser = async (req, res) => {
 // }
 
 
-// const logoutUser = async (req, res) => {
-//     try {
-//         res.clearCookie('refresh_token')
-//         return res.status(200).json({
-//             status: 'OK',
-//             message: 'Logout successfully'
-//         })
-//     } catch (e) {
-//         return res.status(404).json({
-//             message: e
-//         })
-//     }
-// }

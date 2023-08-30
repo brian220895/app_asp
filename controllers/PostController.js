@@ -113,10 +113,11 @@ export const deletePost = async (req, res) => {
             })
         }
 
-        await postModel.findByIdAndDelete(postId)
+        const DeletedPost = await postModel.findByIdAndDelete(postId)
         return res.status(200).json({
             status: 'OK',
             message: 'Delete user success',
+            data:DeletedPost
         })
 
 
