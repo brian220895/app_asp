@@ -102,7 +102,6 @@ export const updateUser = async (req, res) => {
         }
   
         const updatedUser = await userModel.findByIdAndUpdate({_id:userId}, data, { new: true })
-        // const {...others}=updatedUser._doc
         return res.status(200).json({
             status: 'OK',
             message: 'SUCCESS',
