@@ -211,13 +211,15 @@ export const loginUser = async (req, res) => {
                 secure:true,
                 // path: "/",
                 // sameSite: "strict",
+                sameSite: false,
               });
 
               res.cookie("refreshToken", refreshToken, {
                 // httpOnly: true,
-                secure:true,
+                // secure:true,
                 // path: "/",
                 // sameSite: "strict",
+                sameSite: false,
               });
          
               const {password,...others}=checkUser._doc
@@ -263,15 +265,17 @@ export const loginUser = async (req, res) => {
         
         res.cookie('token', newAccessToken, {
             // httpOnly: true,
-            secure: true,
+            // secure: true,
             // sameSite: 'strict',
             // path: '/',
+            sameSite: false,
         })
         res.cookie('refreshToken', newRefreshToken, {
             // httpOnly: true,
-            secure: true,
+            // secure: true,
             // sameSite: 'strict',
             // path: '/',
+            sameSite: false,
         })
         return res.status(200).json({
             status: 'OK',
