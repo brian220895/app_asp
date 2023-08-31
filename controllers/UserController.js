@@ -206,21 +206,24 @@ export const loginUser = async (req, res) => {
               const accessToken = generateAccessToken(checkUser)
               const refreshToken = generateRefreshToken(checkUser)
           
-              res.cookie("token", accessToken, {
-                // httpOnly: true,
-                secure:true,
-                // path: "/",
-                // sameSite: "strict",
-                sameSite: false,
-              });
+            //   res.cookie("token", accessToken, {
+            //     // httpOnly: true,
+            //     secure:true,
+            //     // path: "/",
+            //     // sameSite: "strict",
+            //     sameSite: false,
+            //   });
+              res.cookie( 'token', accessToken,{ maxAge: 1000 * 60 * 10, httpOnly: false });
 
-              res.cookie("refreshToken", refreshToken, {
-                // httpOnly: true,
-                // secure:true,
-                // path: "/",
-                // sameSite: "strict",
-                sameSite: false,
-              });
+            //   res.cookie("refreshToken", refreshToken, {
+            //     // httpOnly: true,
+            //     // secure:true,
+            //     // path: "/",
+            //     // sameSite: "strict",
+            //     sameSite: false,
+            //   });
+
+              res.cookie( 'refreshToken', refreshToken,{ maxAge: 1000 * 60 * 10, httpOnly: false });
          
               const {password,...others}=checkUser._doc
               // console.log(checkUser._doc)
@@ -263,20 +266,26 @@ export const loginUser = async (req, res) => {
         const newRefreshToken=generateRefreshToken(user)
         // refreshTokens.push(newRefreshToken)
         
-        res.cookie('token', newAccessToken, {
-            // httpOnly: true,
-            // secure: true,
-            // sameSite: 'strict',
-            // path: '/',
-            sameSite: false,
-        })
-        res.cookie('refreshToken', newRefreshToken, {
-            // httpOnly: true,
-            // secure: true,
-            // sameSite: 'strict',
-            // path: '/',
-            sameSite: false,
-        })
+        // res.cookie('token', newAccessToken, {
+        //     // httpOnly: true,
+        //     // secure: true,
+        //     // sameSite: 'strict',
+        //     path: '/',
+        //     sameSite: false,
+        // })
+        res.cookie( 'token', newAccessToken,{ maxAge: 1000 * 60 * 10, httpOnly: false });
+
+
+        // res.cookie('refreshToken', newRefreshToken, {
+        //     // httpOnly: true,
+        //     // secure: true,
+        //     // sameSite: 'strict',
+        //     // path: '/',
+        //     sameSite: false,
+        // })
+      
+        res.cookie( 'refreshToken', newRefreshToken,{ maxAge: 1000 * 60 * 10, httpOnly: false });
+
         return res.status(200).json({
             status: 'OK',
             message: 'SUCCESS',
