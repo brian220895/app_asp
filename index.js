@@ -14,7 +14,7 @@ var url =process.env.URI
 
 app.use(cors());
 
-app.use("/",createProxyMiddleware({ 
+app.use("*",createProxyMiddleware({ 
     target: 'https://brian-server.cyclic.app', //original url
     changeOrigin: true, 
     //secure: false,
