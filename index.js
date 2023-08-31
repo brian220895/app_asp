@@ -13,18 +13,34 @@ var url =process.env.URI
 app.use(cors());
 
 
-// const corsOptions = {
-//   credentials: true,
-//   ///..other options
-// };
+const corsOptions = {
+  credentials: true,
+  ///..other options
+};
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+
+app.use(cors({
+  origin:[
+    'https://brian-server.cyclic.app',
+    
+  ],
+  credentials:true,
+  method:['GET','PUT','POST','DELETE','OPTIONS'],
+  allowedHeaders:[
+    'Access-Control-Allow-Origin',
+    'Content-Type',
+    'Authorization',
+  ],
+}));
+
+
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
 // app.use("/",createProxyMiddleware({ 
 //     target: 'https://brian-server.cyclic.app', //original url
