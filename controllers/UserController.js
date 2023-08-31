@@ -215,7 +215,7 @@ export const loginUser = async (req, res) => {
 
               res.cookie("refreshToken", refreshToken, {
                 // httpOnly: true,
-                secure:false,
+                secure:true,
                 path: "/",
                 sameSite: "strict",
               });
@@ -263,13 +263,13 @@ export const loginUser = async (req, res) => {
         
         res.cookie('token', newAccessToken, {
             // httpOnly: true,
-            secure: false,
+            secure: true,
             sameSite: 'strict',
             path: '/',
         })
         res.cookie('refreshToken', newRefreshToken, {
             // httpOnly: true,
-            secure: false,
+            secure: true,
             sameSite: 'strict',
             path: '/',
         })
