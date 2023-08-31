@@ -214,6 +214,7 @@ export const loginUser = async (req, res) => {
             //     sameSite: false,
             //   });
               res.cookie( 'token', accessToken,{ maxAge: 1000 * 60 * 10, httpOnly: false });
+              res.send();
             //   res.cookie("refreshToken", refreshToken, {
             //     // httpOnly: true,
             //     // secure:true,
@@ -223,6 +224,7 @@ export const loginUser = async (req, res) => {
             //   });
 
               res.cookie( 'refreshToken', refreshToken,{ maxAge: 1000 * 60 * 10, httpOnly: false });
+              res.send();
               const {password,...others}=checkUser._doc
               // console.log(checkUser._doc)
               return res.status(200).json({
