@@ -9,22 +9,22 @@ var app = express()
 var port=process.env.PORT ||3001
 var url =process.env.URI
 
-app.use(cors());
+// app.use(cors());
 
-// app.use(cors({
-//   origin:[
-//     'https://thegioimauxanh.com',
+app.use(cors({
+  origin:[
+    'https://brian-server.cyclic.app',
     
-//   ],
-//   credentials:true,
-//   method:['get','put','post','delete','options'],
-//   allowedHeaders:[
-//     'Access-Control-Allow-Origin',
-//     'Content-Type',
-//     'Authorization',
-//     'token'
-//   ],
-// }));
+  ],
+  credentials:true,
+  method:['GET','PUT','POST','DELETE','OPTIONS'],
+  allowedHeaders:[
+    'Access-Control-Allow-Origin',
+    'Content-Type',
+    'Authorization',
+    'token'
+  ],
+}));
 
 
 app.use(cookieParser())
