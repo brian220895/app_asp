@@ -14,7 +14,8 @@ var url =process.env.URI
 app.use(cors({
   origin:[
     'http://localhost:3000',
-    'https://thegioimauxanh.com'
+    'https://brian-server.cyclic.app',
+    
   ],
   credentials:true,
   method:['GET','PUT','POST','DELETE','OPTIONS'],
