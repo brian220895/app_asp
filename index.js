@@ -44,20 +44,20 @@ var url =process.env.URI
 // }));
 
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
-// app.use("/",createProxyMiddleware({ 
-//     target: 'https://brian-server.cyclic.app', //original url
-//     changeOrigin: true, 
-//     //secure: false,
-//     onProxyRes: function (proxyRes, req, res) {
-//        proxyRes.headers['Access-Control-Allow-Origin'] = '*';
-//     }
-// }));
+app.use("/",createProxyMiddleware({ 
+    target: 'https://brian-server.cyclic.app', //original url
+    changeOrigin: true, 
+    //secure: false,
+    onProxyRes: function (proxyRes, req, res) {
+       proxyRes.headers['Access-Control-Allow-Origin'] = '*';
+    }
+}));
 
 
 
