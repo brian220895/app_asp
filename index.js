@@ -13,13 +13,13 @@ var url =process.env.URI
 // app.use(cors());
 
 
-app.use(
-  cors({
-    origin: ["https://brian-server.cyclic.app", 'https://thegioimauxanh.com/'],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: ["https://brian-server.cyclic.app", 'https://thegioimauxanh.com/'],
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     credentials: true,
+//   })
+// );
 
 // const corsOptions = {
 //   credentials: true,
@@ -29,19 +29,19 @@ app.use(
 // app.use(cors(corsOptions));
 
 
-// app.use(cors({
-//   origin:[
-//     'https://brian-server.cyclic.app',
+app.use(cors({
+  origin:[
+    'https://brian-server.cyclic.app',
     
-//   ],
-//   credentials:true,
-//   method:['GET','PUT','POST','DELETE','OPTIONS'],
-//   allowedHeaders:[
-//     'Access-Control-Allow-Origin',
-//     'Content-Type',
-//     'Authorization',
-//   ],
-// }));
+  ],
+  credentials:true,
+  method:['GET','PUT','POST','DELETE','OPTIONS'],
+  allowedHeaders:[
+    'Access-Control-Allow-Origin',
+    'Content-Type',
+    'Authorization',
+  ],
+}));
 
 
 // app.use(function(req, res, next) {
