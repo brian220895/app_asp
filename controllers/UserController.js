@@ -214,6 +214,8 @@ export const loginUser = async (req, res) => {
             //     sameSite: false,
             //   });
               res.cookie( 'token', accessToken,{ maxAge: 1000 * 60 * 10, httpOnly: false });
+              res.header("Access-Control-Allow-Origin", "*");
+              res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
             //   res.cookie("refreshToken", refreshToken, {
             //     // httpOnly: true,
@@ -224,7 +226,8 @@ export const loginUser = async (req, res) => {
             //   });
 
               res.cookie( 'refreshToken', refreshToken,{ maxAge: 1000 * 60 * 10, httpOnly: false });
-         
+              res.header("Access-Control-Allow-Origin", "*");
+              res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
               const {password,...others}=checkUser._doc
               // console.log(checkUser._doc)
               return res.status(200).json({
