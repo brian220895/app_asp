@@ -13,12 +13,12 @@ var url =process.env.URI
 app.use(cors());
 
 
-const corsOptions = {
-  credentials: true,
-  ///..other options
-};
+// const corsOptions = {
+//   credentials: true,
+//   ///..other options
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 
 // app.use(cors({
