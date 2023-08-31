@@ -22,7 +22,6 @@ app.use(cors({
     'Access-Control-Allow-Origin',
     'Content-Type',
     'Authorization',
-    'token'
   ],
 }));
 
