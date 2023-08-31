@@ -10,8 +10,16 @@ var app = express()
 var port=process.env.PORT ||3001
 var url =process.env.URI
 
-app.use(cors());
+// app.use(cors());
 
+
+app.use(
+  cors({
+    origin: ["https://brian-server.cyclic.app", 'https://thegioimauxanh.com/'],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 // const corsOptions = {
 //   credentials: true,

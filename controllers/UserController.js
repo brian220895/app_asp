@@ -206,24 +206,43 @@ export const loginUser = async (req, res) => {
               const accessToken = generateAccessToken(checkUser)
               const refreshToken = generateRefreshToken(checkUser)
           
-              res.cookie("token", accessToken, {
+            //   res.cookie("token", accessToken, {
+            //     // httpOnly: true,
+            //     // secure:true,
+            //     // path: "/",
+            //     // sameSite: "strict",
+            //     sameSite: false,
+            //   });
+
+            res.cookie("token", accessToken, {
                 // httpOnly: true,
-                // secure:true,
-                // path: "/",
-                // sameSite: "strict",
-                sameSite: false,
+                sameSite: "none",
+                secure: true,
+                // maxAge: 24 * 60 * 60 * 1000, // 1 day
+                maxAge: 3 * 60 * 1000,
+          
+                path: "/users/login",
               });
         
-              res.send();
-              res.cookie("refreshToken", refreshToken, {
+            //   res.send();
+            //   res.cookie("refreshToken", refreshToken, {
+            //     // httpOnly: true,
+            //     // secure:true,
+            //     // path: "/",
+            //     // sameSite: "strict",
+            //     sameSite: false,
+            //   });
+            //   res.send();
+            res.cookie("refreshToken", refreshToken, {
                 // httpOnly: true,
-                // secure:true,
-                // path: "/",
-                // sameSite: "strict",
-                sameSite: false,
+                sameSite: "none",
+                secure: true,
+                // maxAge: 24 * 60 * 60 * 1000, // 1 day
+                maxAge: 3 * 60 * 1000,
+          
+                path: "/users/refresh",
               });
-              res.send();
-              
+
               const {password,...others}=checkUser._doc
               // console.log(checkUser._doc)
               return res.status(200).json({
