@@ -17,7 +17,7 @@ app.use(cors({
     'https://brian-server.cyclic.app',
     
   ],
-  credentials:true,
+  credentials:'include',
   method:['GET','PUT','POST','DELETE','OPTIONS'],
   allowedHeaders:[
     'Access-Control-Allow-Origin',
