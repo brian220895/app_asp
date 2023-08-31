@@ -4,12 +4,24 @@ import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
 import routers from './routes/index.js';
+import { createProxyMiddleware } from 'http-proxy-middleware'
 dotenv.config();
 var app = express()
 var port=process.env.PORT ||3001
 var url =process.env.URI
 
 // app.use(cors());
+
+app.use(cors());
+
+app.use( createProxyMiddleware({ 
+    target: 'https://thegioimauxanh.com', //original url
+    changeOrigin: true, 
+    //secure: false,
+    onProxyRes: function (proxyRes, req, res) {
+       proxyRes.headers['Access-Control-Allow-Origin'] = '*';
+    }
+}));
 
 
 
@@ -19,19 +31,19 @@ app.use(express.urlencoded({ extended: true, limit: '30mb' }));
 
 routers(app)
 
-app.use(cors({
-  origin:[
-    'https://brian-server.cyclic.app',
+// app.use(cors({
+//   origin:[
+//     'https://brian-server.cyclic.app',
     
-  ],
-  credentials:true,
-  method:['GET','PUT','POST','DELETE','OPTIONS'],
-  allowedHeaders:[
-    'Access-Control-Allow-Origin',
-    'Content-Type',
-    'Authorization',
-  ],
-}));
+//   ],
+//   credentials:true,
+//   method:['GET','PUT','POST','DELETE','OPTIONS'],
+//   allowedHeaders:[
+//     'Access-Control-Allow-Origin',
+//     'Content-Type',
+//     'Authorization',
+//   ],
+// }));
 
 mongoose
   .connect( url, { useNewUrlParser: true, useUnifiedTopology: true })
