@@ -10,15 +10,15 @@ var app = express()
 var port=process.env.PORT ||3001
 var url =process.env.URI
 
-// app.use(cors());
+app.use(cors());
 
 
-const corsOptions = {
-  credentials: true,
-  ///..other options
-};
+// const corsOptions = {
+//   credentials: true,
+//   ///..other options
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
