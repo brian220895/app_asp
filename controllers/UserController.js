@@ -221,7 +221,7 @@ export const loginUser = async (req, res) => {
                 // maxAge: 24 * 60 * 60 * 1000, // 1 day
                 maxAge: 3 * 60 * 1000,
           
-                path: "/users/login",
+                path: "/home",
               });
         
             //   res.send();
@@ -240,7 +240,7 @@ export const loginUser = async (req, res) => {
                 // maxAge: 24 * 60 * 60 * 1000, // 1 day
                 maxAge: 3 * 60 * 1000,
           
-                path: "/users/refresh",
+                path: "/home",
               });
             res.send();
               const {password,...others}=checkUser._doc
