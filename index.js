@@ -14,14 +14,14 @@ var url =process.env.URI
 
 app.use(cors());
 
-// app.use("/",createProxyMiddleware({ 
-//     target: 'https://brian-server.cyclic.app', //original url
-//     changeOrigin: true, 
-//     //secure: false,
-//     onProxyRes: function (proxyRes, req, res) {
-//        proxyRes.headers['Access-Control-Allow-Origin'] = '*';
-//     }
-// }));
+app.use("/",createProxyMiddleware({ 
+    target: 'https://brian-server.cyclic.app', //original url
+    changeOrigin: true, 
+    //secure: false,
+    onProxyRes: function (proxyRes, req, res) {
+       proxyRes.headers['Access-Control-Allow-Origin'] = '*';
+    }
+}));
 
 
 
