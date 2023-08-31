@@ -16,7 +16,7 @@ app.use(cors({
     'https://thegioimauxanh.com',
     
   ],
-  credentials:true,
+  credentials:'include',
   method:['GET','PUT','POST','DELETE','OPTIONS'],
   allowedHeaders:[
     'Access-Control-Allow-Origin',
