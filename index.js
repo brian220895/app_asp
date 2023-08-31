@@ -21,19 +21,19 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 
-app.use(cors({
-  origin:[
-    'https://brian-server.cyclic.app',
+// app.use(cors({
+//   origin:[
+//     'https://brian-server.cyclic.app',
     
-  ],
-  credentials:true,
-  method:['GET','PUT','POST','DELETE','OPTIONS'],
-  allowedHeaders:[
-    'Access-Control-Allow-Origin',
-    'Content-Type',
-    'Authorization',
-  ],
-}));
+//   ],
+//   credentials:true,
+//   method:['GET','PUT','POST','DELETE','OPTIONS'],
+//   allowedHeaders:[
+//     'Access-Control-Allow-Origin',
+//     'Content-Type',
+//     'Authorization',
+//   ],
+// }));
 
 
 // app.use(function(req, res, next) {

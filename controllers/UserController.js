@@ -206,25 +206,24 @@ export const loginUser = async (req, res) => {
               const accessToken = generateAccessToken(checkUser)
               const refreshToken = generateRefreshToken(checkUser)
           
-            //   res.cookie("token", accessToken, {
-            //     // httpOnly: true,
-            //     secure:true,
-            //     // path: "/",
-            //     // sameSite: "strict",
-            //     sameSite: false,
-            //   });
-              res.cookie( 'token', accessToken,{ maxAge: 1000 * 60 * 10, httpOnly: false });
+              res.cookie("token", accessToken, {
+                // httpOnly: true,
+                // secure:true,
+                // path: "/",
+                // sameSite: "strict",
+                sameSite: false,
+              });
+        
               res.send();
-            //   res.cookie("refreshToken", refreshToken, {
-            //     // httpOnly: true,
-            //     // secure:true,
-            //     // path: "/",
-            //     // sameSite: "strict",
-            //     sameSite: false,
-            //   });
-
-              res.cookie( 'refreshToken', refreshToken,{ maxAge: 1000 * 60 * 10, httpOnly: false });
+              res.cookie("refreshToken", refreshToken, {
+                // httpOnly: true,
+                // secure:true,
+                // path: "/",
+                // sameSite: "strict",
+                sameSite: false,
+              });
               res.send();
+              
               const {password,...others}=checkUser._doc
               // console.log(checkUser._doc)
               return res.status(200).json({
