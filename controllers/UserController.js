@@ -202,7 +202,7 @@ export const loginUser = async (req, res) => {
          
             
      
-            // if(checkUser && comparePassword){
+            if(checkUser && comparePassword){
               const accessToken = generateAccessToken(checkUser)
               const refreshToken = generateRefreshToken(checkUser)
 
@@ -256,7 +256,7 @@ export const loginUser = async (req, res) => {
                   accessToken,
                   ...others
               })
-            // }
+            }
              
   
               
