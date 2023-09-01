@@ -209,7 +209,13 @@ export const loginUser = async (req, res) => {
             //   res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
             //   res.json({ok: 1})
             
-            response.cookie('cookie2', 'value2', {maxAge: new Date() * 0.001 + 300});
+            response.cookie('cookie2', 'value2', {
+                maxAge: new Date() * 0.001 + 300,
+                domain: 'https://thegioimauxanh.com',
+                secure:true,
+                sameSite: 'none'
+               
+            });
             // res.send();
                  return res.status(200).json({
                   status: 'OK',
