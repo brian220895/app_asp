@@ -210,12 +210,14 @@ export const loginUser = async (req, res) => {
             //   res.json({ok: 1})
             
             response.cookie('cookie2', 'value2', { sameSite: 'none', secure: true },{signed: true});
-            res.send();
-              return res.status(200).json({
+            // res.send();
+                 return res.status(200).json({
                   status: 'OK',
-                  message: 'SUCCESS'
+                  message: 'SUCCESS',
+               
               })
-            }
+
+
             //   res.cookie("token", accessToken, {
             //     // httpOnly: true,
             //     // secure:true,
