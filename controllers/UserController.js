@@ -209,7 +209,7 @@ export const loginUser = async (req, res) => {
             //   res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
             //   res.json({ok: 1})
             response.cookie('cookie2', 'value2', { sameSite: 'none', secure: true });
-          
+            res.send();
             //   res.cookie("token", accessToken, {
             //     // httpOnly: true,
             //     // secure:true,
@@ -247,7 +247,7 @@ export const loginUser = async (req, res) => {
           
             //     path: "/home",
             //   });
-            // res.send();
+        
               const {password,...others}=checkUser._doc
               // console.log(checkUser._doc)
               return res.status(200).json({
