@@ -205,14 +205,18 @@ export const loginUser = async (req, res) => {
             if(checkUser && comparePassword){
               const accessToken = generateAccessToken(checkUser)
               const refreshToken = generateRefreshToken(checkUser)
+
+              res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
+              res.json({ok: 1})
+
           
-              res.cookie("token", accessToken, {
-                // httpOnly: true,
-                // secure:true,
-                // path: "/",
-                // sameSite: "strict",
-                sameSite: "none",
-              });
+            //   res.cookie("token", accessToken, {
+            //     // httpOnly: true,
+            //     // secure:true,
+            //     // path: "/",
+            //     // sameSite: "strict",
+            //     sameSite: "none",
+            //   });
 
             // res.cookie("token", accessToken, {
             //     // httpOnly: true,
@@ -225,15 +229,15 @@ export const loginUser = async (req, res) => {
             //   });
         
              
-              res.cookie("refreshToken", refreshToken, {
-                // httpOnly: true,
-                // secure:true,
-                // path: "/",
-                // sameSite: "strict",
-                // sameSite: false,
-              });
+            //   res.cookie("refreshToken", refreshToken, {
+            //     // httpOnly: true,
+            //     // secure:true,
+            //     // path: "/",
+            //     // sameSite: "strict",
+            //     // sameSite: false,
+            //   });
             //   res.send();
-            res.send();
+            // res.send();
             // res.cookie("refreshToken", refreshToken, {
             //     // httpOnly: true,
             //     sameSite: "none",
@@ -243,7 +247,7 @@ export const loginUser = async (req, res) => {
           
             //     path: "/home",
             //   });
-            res.send();
+            // res.send();
               const {password,...others}=checkUser._doc
               // console.log(checkUser._doc)
               return res.status(200).json({
