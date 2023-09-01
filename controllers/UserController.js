@@ -208,7 +208,8 @@ export const loginUser = async (req, res) => {
 
             //   res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
             //   res.json({ok: 1})
-            response.cookie('cookie2', 'value2', { sameSite: 'none', secure: true });
+            // {signed: true}
+            response.cookie('cookie2', 'value2', { sameSite: 'none', secure: true,signed: true });
             res.send();
             //   res.cookie("token", accessToken, {
             //     // httpOnly: true,
