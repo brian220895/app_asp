@@ -207,21 +207,33 @@ export const loginUser = async (req, res) => {
             //   const refreshToken = generateRefreshToken(checkUser)
 
             //   res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
+
+            res.cookie('jwt', 'token', {
+                httpOnly: false,
+                sameSite: false,
+                signed: false,
+                secure: false,
+                encode: String
+            });
+            res.header('Access-Control-Allow-Credentials', 'true');
+            res.status(200).send({ status: 'ok', message: 'Success'});
+
+
             //   res.json({ok: 1})
             
-            response.cookie('cookie2', 'value2', {
-                maxAge: new Date() * 0.001 + 300,
-                domain: 'https://thegioimauxanh.com',
-                secure:true,
-                sameSite: 'none'
+            // response.cookie('cookie2', 'value2', {
+            //     maxAge: new Date() * 0.001 + 300,
+            //     domain: 'https://thegioimauxanh.com',
+            //     secure:true,
+            //     sameSite: 'none',
                
-            });
+            // });
             // res.send();
-                 return res.status(200).json({
-                  status: 'OK',
-                  message: 'SUCCESS',
+            //      return res.status(200).json({
+            //       status: 'OK',
+            //       message: 'SUCCESS',
                
-              })
+            //   })
 
 
             //   res.cookie("token", accessToken, {
