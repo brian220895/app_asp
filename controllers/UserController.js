@@ -217,11 +217,11 @@ export const loginUser = async (req, res) => {
             //     encode: String,
             //     signed: true
             // });
-            res.header('Access-Control-Allow-Credentials', 'true');
-            res.status(200).send({ status: 'ok', message: 'Success'});
+            // res.header('Access-Control-Allow-Credentials', 'true');
+            // res.status(200).send({ status: 'ok', message: 'Success'});
 
 
-            //   res.json({ok: 1})
+              res.json({ok: 1})
             
             // response.cookie('cookie2', 'value2', {
             //     maxAge: new Date() * 0.001 + 300,
