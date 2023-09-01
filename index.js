@@ -3,7 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
-import routers from './routes/index.js';
+// import routers from './routes/index.js';
 // import { createProxyMiddleware } from 'http-proxy-middleware'
 dotenv.config();
 var app = express()
@@ -12,7 +12,7 @@ var url =process.env.URI
 
 // app.use(cors());
 
-app.use(cookieParser('anonystick'));
+// app.use(cookieParser('anonystick'));
 
 
 
@@ -26,21 +26,21 @@ app.use("*",cors({
   credentials:true
 }))
 
-routers(app)
+// routers(app)
 
 
-// app.use(cookieParser('anonystick'));
+app.use(cookieParser('anonystick'));
 
-// app.get('/setCookie', (req, res)=> {
-//     res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
-//     res.json({ok: 1})
-// })
+app.get('/setCookie', (req, res)=> {
+    res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
+    res.json({ok: 1})
+})
 
-// app.get('/getCookie', (req, res)=> {
-//     console.log('[ANONY] getCookie::::', req.cookies); 
-//     console.log('[ANONY] getCookie::::signedCookies::::',req.signedCookies.sitesSecurity)
-//     res.json({ok: req.cookies})
-// })
+app.get('/getCookie', (req, res)=> {
+    console.log('[ANONY] getCookie::::', req.cookies); 
+    console.log('[ANONY] getCookie::::signedCookies::::',req.signedCookies.sitesSecurity)
+    res.json({ok: req.cookies})
+})
 
 
 mongoose
