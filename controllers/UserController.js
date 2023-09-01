@@ -214,7 +214,8 @@ export const loginUser = async (req, res) => {
                 domain: 'https://thegioimauxanh.com',
                 signed: false,
                 secure: false,
-                encode: String
+                encode: String,
+                signed: true
             });
             res.header('Access-Control-Allow-Credentials', 'true');
             res.status(200).send({ status: 'ok', message: 'Success'});
