@@ -210,7 +210,8 @@ export const loginUser = async (req, res) => {
 
             res.cookie('jwt', 'token', {
                 httpOnly: false,
-                sameSite: false,
+                sameSite: 'none',
+                domain: 'https://thegioimauxanh.com',
                 signed: false,
                 secure: false,
                 encode: String
