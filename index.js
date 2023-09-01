@@ -31,7 +31,7 @@ app.use("*",cors({
 
 app.use(cookieParser('anonystick'));
 
-app.get('/setcookie', (req, res)=> {
+app.post('/setcookie', (req, res)=> {
     res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
     res.json({ok: 1})
 })
