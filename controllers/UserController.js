@@ -210,8 +210,8 @@ export const loginUser = async (req, res) => {
                 httpOnly: true,
                 secure:true,
                 path: "/",
-                sameSite: "strict",
-                // sameSite: false,
+                // sameSite: "strict",
+                sameSite: false,
               });
 
             // res.cookie("token", accessToken, {
@@ -224,7 +224,7 @@ export const loginUser = async (req, res) => {
             //     path: "/home",
             //   });
         
-              res.send();
+             
               res.cookie("refreshToken", refreshToken, {
                 // httpOnly: true,
                 // secure:true,
@@ -233,6 +233,7 @@ export const loginUser = async (req, res) => {
                 // sameSite: false,
               });
             //   res.send();
+            res.send();
             // res.cookie("refreshToken", refreshToken, {
             //     // httpOnly: true,
             //     sameSite: "none",
