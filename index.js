@@ -22,14 +22,14 @@ app.use(express.json({ limit: '30mb' }));
 app.use(express.urlencoded({ extended: true, limit: '30mb' }));
 
 app.use("*",cors({
-  origin:true,
+  origin:false,
   credentials:true
 }))
 
 routers(app)
 
 
-app.use(cookieParser());
+app.use(cookieParser('anonystick'));
 
 app.get('/setcookie', (req, res)=> {
     res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
