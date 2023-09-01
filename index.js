@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
 import routers from './routes/index.js';
-import { createProxyMiddleware } from 'http-proxy-middleware'
+// import { createProxyMiddleware } from 'http-proxy-middleware'
 dotenv.config();
 var app = express()
 var port=process.env.PORT ||3001
@@ -13,30 +13,6 @@ var url =process.env.URI
 // app.use(cors());
 
 
-// app.use(
-//   cors({
-//     origin: ["https://brian-server.cyclic.app", 'https://thegioimauxanh.com/'],
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     credentials: true,
-//   })
-// );
-
-// const corsOptions = {
-//   credentials: true,
-//   ///..other options
-// };
-
-// app.use(cors(corsOptions));
-
-
-
-app.use(function (req, res, next) {
-  //Enabling CORS
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
-    next();
-  });
 
 
 
@@ -45,21 +21,12 @@ app.use(cookieParser())
 app.use(express.json({ limit: '30mb' }));
 app.use(express.urlencoded({ extended: true, limit: '30mb' }));
 
-routers(app)
+app.use("*",cors({
+  origin:true,
+  credentials:true
+}))
 
-// app.use(cors({
-//   origin:[
-//     'https://brian-server.cyclic.app',
-    
-//   ],
-//   credentials:true,
-//   method:['GET','PUT','POST','DELETE','OPTIONS'],
-//   allowedHeaders:[
-//     'Access-Control-Allow-Origin',
-//     'Content-Type',
-//     'Authorization',
-//   ],
-// }));
+routers(app)
 
 mongoose
   .connect( url, { useNewUrlParser: true, useUnifiedTopology: true })

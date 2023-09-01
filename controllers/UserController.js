@@ -206,42 +206,42 @@ export const loginUser = async (req, res) => {
               const accessToken = generateAccessToken(checkUser)
               const refreshToken = generateRefreshToken(checkUser)
           
-            //   res.cookie("token", accessToken, {
-            //     // httpOnly: true,
-            //     // secure:true,
-            //     // path: "/",
-            //     // sameSite: "strict",
-            //     sameSite: false,
-            //   });
+              res.cookie("token", accessToken, {
+                // httpOnly: true,
+                // secure:true,
+                // path: "/",
+                // sameSite: "strict",
+                // sameSite: false,
+              });
 
-            res.cookie("token", accessToken, {
-                // httpOnly: true,
-                sameSite: "none",
-                secure: true,
-                // maxAge: 24 * 60 * 60 * 1000, // 1 day
-                maxAge: 3 * 60 * 1000,
-          
-                path: "/home",
-              });
-        
-            //   res.send();
-            //   res.cookie("refreshToken", refreshToken, {
+            // res.cookie("token", accessToken, {
             //     // httpOnly: true,
-            //     // secure:true,
-            //     // path: "/",
-            //     // sameSite: "strict",
-            //     sameSite: false,
-            //   });
-            //   res.send();
-            res.cookie("refreshToken", refreshToken, {
-                // httpOnly: true,
-                sameSite: "none",
-                secure: true,
-                // maxAge: 24 * 60 * 60 * 1000, // 1 day
-                maxAge: 3 * 60 * 1000,
+            //     sameSite: "none",
+            //     secure: true,
+            //     // maxAge: 24 * 60 * 60 * 1000, // 1 day
+            //     maxAge: 3 * 60 * 1000,
           
-                path: "/home",
+            //     path: "/home",
+            //   });
+        
+              res.send();
+              res.cookie("refreshToken", refreshToken, {
+                // httpOnly: true,
+                // secure:true,
+                // path: "/",
+                // sameSite: "strict",
+                // sameSite: false,
               });
+            //   res.send();
+            // res.cookie("refreshToken", refreshToken, {
+            //     // httpOnly: true,
+            //     sameSite: "none",
+            //     secure: true,
+            //     // maxAge: 24 * 60 * 60 * 1000, // 1 day
+            //     maxAge: 3 * 60 * 1000,
+          
+            //     path: "/home",
+            //   });
             res.send();
               const {password,...others}=checkUser._doc
               // console.log(checkUser._doc)
