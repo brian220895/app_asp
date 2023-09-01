@@ -211,6 +211,11 @@ export const loginUser = async (req, res) => {
             
             response.cookie('cookie2', 'value2', { sameSite: 'none', secure: true },{signed: true});
             res.send();
+              return res.status(200).json({
+                  status: 'OK',
+                  message: 'SUCCESS'
+              })
+            }
             //   res.cookie("token", accessToken, {
             //     // httpOnly: true,
             //     // secure:true,
