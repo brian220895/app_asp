@@ -170,30 +170,30 @@ export const loginUser = async (req, res) => {
     try {
           const { username, password } = req.body
      
-        if (!username || !password) {
-            return res.status(404).json({
-                status: 'ERR',
-                message: 'The input is required'
-            })
-        }
+        // if (!username || !password) {
+        //     return res.status(404).json({
+        //         status: 'ERR',
+        //         message: 'The input is required'
+        //     })
+        // }
 
-            const checkUser = await userModel.findOne({
-                username: username
-            })
-            if (!checkUser) {
-                return res.status(404).json({
-                    status: 'ERR',
-                    message: 'The user is not defined'
-                })
-            }
-            const comparePassword = bcrypt.compareSync(password, checkUser.password)
+            // const checkUser = await userModel.findOne({
+            //     username: username
+            // })
+            // if (!checkUser) {
+            //     return res.status(404).json({
+            //         status: 'ERR',
+            //         message: 'The user is not defined'
+            //     })
+            // }
+            // const comparePassword = bcrypt.compareSync(password, checkUser.password)
 
-            if (!comparePassword) {
-                return res.status(404).json({
-                    status: 'ERR',
-                    message: 'The password or user is incorrect'
-                })
-            }
+            // if (!comparePassword) {
+            //     return res.status(404).json({
+            //         status: 'ERR',
+            //         message: 'The password or user is incorrect'
+            //     })
+            // }
 
             // const access_token = await genneralAccessToken({
             //     id: checkUser.id,
@@ -202,9 +202,9 @@ export const loginUser = async (req, res) => {
          
             
      
-            if(checkUser && comparePassword){
-              const accessToken = generateAccessToken(checkUser)
-              const refreshToken = generateRefreshToken(checkUser)
+            // if(checkUser && comparePassword){
+            //   const accessToken = generateAccessToken(checkUser)
+            //   const refreshToken = generateRefreshToken(checkUser)
 
             //   res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
             //   res.json({ok: 1})
@@ -248,15 +248,15 @@ export const loginUser = async (req, res) => {
             //     path: "/home",
             //   });
         
-              const {password,...others}=checkUser._doc
-              // console.log(checkUser._doc)
-              return res.status(200).json({
-                  status: 'OK',
-                  message: 'SUCCESS',
-                  accessToken,
-                  ...others
-              })
-            }
+            //   const {password,...others}=checkUser._doc
+            //   // console.log(checkUser._doc)
+            //   return res.status(200).json({
+            //       status: 'OK',
+            //       message: 'SUCCESS',
+            //       accessToken,
+            //       ...others
+            //   })
+            // }
              
   
               
