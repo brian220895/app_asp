@@ -25,11 +25,11 @@ app.use("*",cors({
   origin:false,
   credentials:true
 }))
-
+app.use(cookieParser('anonystick'));
 routers(app)
 
 
-app.use(cookieParser('anonystick'));
+
 
 app.get('/setcookie', (req, res)=> {
     res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
