@@ -206,8 +206,8 @@ export const loginUser = async (req, res) => {
             //   const accessToken = generateAccessToken(checkUser)
             //   const refreshToken = generateRefreshToken(checkUser)
 
-              res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
-             return res.json({ok: 1})
+            //   res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
+             return res.json()
             // response.cookie('cookie2', 'value2', { sameSite: 'none', secure: true });
           
             //   res.cookie("token", accessToken, {

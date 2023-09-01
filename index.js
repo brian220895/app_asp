@@ -17,7 +17,7 @@ var url =process.env.URI
 
 
 // app.use(express.cookieParser());
-app.use(cookieParser())
+// app.use(cookieParser())
 app.use(express.json({ limit: '30mb' }));
 app.use(express.urlencoded({ extended: true, limit: '30mb' }));
 
@@ -29,18 +29,18 @@ app.use("*",cors({
 routers(app)
 
 
-// app.use(cookieParser('anonystick'));
+app.use(cookieParser('anonystick'));
 
-// app.post('/setcookie', (req, res)=> {
-//     res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
-//     res.json({ok: 1})
-// })
+app.post('/setcookie', (req, res)=> {
+    res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
+    res.json({ok: 1})
+})
 
-// app.get('/getcookie', (req, res)=> {
-//     console.log('[ANONY] getCookie::::', req.cookies); 
-//     console.log('[ANONY] getCookie::::signedCookies::::',req.signedCookies.sitesSecurity)
-//     res.json({ok: req.cookies})
-// })
+app.get('/getcookie', (req, res)=> {
+    console.log('[ANONY] getCookie::::', req.cookies); 
+    console.log('[ANONY] getCookie::::signedCookies::::',req.signedCookies.sitesSecurity)
+    res.json({ok: req.cookies})
+})
 
 
 mongoose
