@@ -31,12 +31,12 @@ app.use("*",cors({
 
 app.use(cookieParser('anonystick'));
 
-app.get('/setCookie', (req, res)=> {
+app.get('/setcookie', (req, res)=> {
     res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
     res.json({ok: 1})
 })
 
-app.get('/getCookie', (req, res)=> {
+app.get('/getcookie', (req, res)=> {
     console.log('[ANONY] getCookie::::', req.cookies); 
     console.log('[ANONY] getCookie::::signedCookies::::',req.signedCookies.sitesSecurity)
     res.json({ok: req.cookies})
