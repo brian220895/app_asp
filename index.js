@@ -31,7 +31,7 @@ routers(app)
 
 app.use(cookieParser('anonystick'));
 
-app.post('/setcookie', (req, res)=> {
+app.get('/setcookie', (req, res)=> {
     res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
     res.json({ok: 1})
 })
