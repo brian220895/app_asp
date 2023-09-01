@@ -3,7 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
-// import routers from './routes/index.js';
+import routers from './routes/index.js';
 // import { createProxyMiddleware } from 'http-proxy-middleware'
 dotenv.config();
 var app = express()
@@ -26,7 +26,7 @@ app.use("*",cors({
   credentials:true
 }))
 
-// routers(app)
+routers(app)
 
 
 // app.use(cookieParser('anonystick'));
