@@ -206,17 +206,17 @@ export const loginUser = async (req, res) => {
             //   const accessToken = generateAccessToken(checkUser)
             //   const refreshToken = generateRefreshToken(checkUser)
 
-            //   res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
+              res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
 
-            res.cookie('jwt', 'token', {
-                httpOnly: false,
-                sameSite: 'none',
-                domain: 'https://thegioimauxanh.com',
-                signed: false,
-                secure: false,
-                encode: String,
-                signed: true
-            });
+            // res.cookie('jwt', 'token', {
+            //     httpOnly: false,
+            //     sameSite: 'none',
+            //     domain: 'https://thegioimauxanh.com',
+            //     signed: false,
+            //     secure: false,
+            //     encode: String,
+            //     signed: true
+            // });
             res.header('Access-Control-Allow-Credentials', 'true');
             res.status(200).send({ status: 'ok', message: 'Success'});
 
