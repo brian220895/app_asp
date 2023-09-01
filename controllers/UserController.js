@@ -207,11 +207,11 @@ export const loginUser = async (req, res) => {
               const refreshToken = generateRefreshToken(checkUser)
           
               res.cookie("token", accessToken, {
-                httpOnly: true,
-                secure:true,
-                path: "/",
+                // httpOnly: true,
+                // secure:true,
+                // path: "/",
                 // sameSite: "strict",
-                sameSite: false,
+                sameSite: "none",
               });
 
             // res.cookie("token", accessToken, {
