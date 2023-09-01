@@ -28,6 +28,21 @@ app.use("*",cors({
 
 routers(app)
 
+
+app.use(cookieParser('anonystick'));
+
+app.get('/setCookie', (req, res)=> {
+    res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
+    res.json({ok: 1})
+})
+
+app.get('/getCookie', (req, res)=> {
+    console.log('[ANONY] getCookie::::', req.cookies); 
+    console.log('[ANONY] getCookie::::signedCookies::::',req.signedCookies.sitesSecurity)
+    res.json({ok: req.cookies})
+})
+
+
 mongoose
   .connect( url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
