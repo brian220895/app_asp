@@ -156,15 +156,15 @@ export const generateAccessToken=(checkUser)=>{
     return jwt.sign({
         id:checkUser.id,
         isAdmin:checkUser.isAdmin,
-    }, process.env.JWT_ACCESS_KEY, { expiresIn: '35s' })
+    }, process.env.JWT_ACCESS_KEY, { expiresIn: '365d' })
 }
 
-export const generateRefreshToken=(checkUser)=>{
-    return jwt.sign({
-        id:checkUser.id,
-        isAdmin:checkUser.isAdmin,
-    }, process.env.JWT_REFRESH_KEY, { expiresIn: '365d' })
-}
+// export const generateRefreshToken=(checkUser)=>{
+//     return jwt.sign({
+//         id:checkUser.id,
+//         isAdmin:checkUser.isAdmin,
+//     }, process.env.JWT_REFRESH_KEY, { expiresIn: '365d' })
+// }
 
 export const loginUser = async (req, res) => {
     try {
@@ -204,7 +204,7 @@ export const loginUser = async (req, res) => {
      
             if(checkUser && comparePassword){
               const accessToken = generateAccessToken(checkUser)
-              const refreshToken = generateRefreshToken(checkUser)
+            //   const refreshToken = generateRefreshToken(checkUser)
  
               res.cookie("token", accessToken, {
                 // httpOnly: true,
@@ -226,8 +226,7 @@ export const loginUser = async (req, res) => {
               return res.status(200).json({
                   status: 'OK',
                   message: 'SUCCESS',
-                  accessToken,
-                  refreshToken,
+                  accessToken
                   ...others
               })
             }
@@ -243,70 +242,70 @@ export const loginUser = async (req, res) => {
   }
 
 
-  export const requestRefreshToken =(req, res) => {
-    try {
-        const refreshToken =req.headers.refreshToken
-        // const refreshToken = req.cookies.refreshToken
-        // console.log('refreshToken_022222',refreshToken)
-        // console.log('refreshToken',refreshToken)
-    //    if(!refreshToken)  return res.status(401).json('You are not authenticated')
-    //    if(!refreshTokens.includes(refreshToken)){
-    //     return res.status(403).json("Refresh token is not valid")
-    //    }
-       jwt.verify(refreshToken, process.env.JWT_REFRESH_KEY, function (err, user) {
-        if (err) {
-            return res.status(404).json('Token is invalid')
-            // console.log(err)
-        }
-        // refreshTokens = refreshTokens.filter((token)=>token !==refreshToken)
-        // const newAccessToken= generateRefreshToken(user)
-        const newAccessToken=generateAccessToken(user)
-        const newRefreshToken=generateRefreshToken(user)
-        // refreshTokens.push(newRefreshToken)
+//   export const requestRefreshToken =(req, res) => {
+//     try {
+//         const refreshToken =req.headers.refreshToken
+//         // const refreshToken = req.cookies.refreshToken
+//         // console.log('refreshToken_022222',refreshToken)
+//         // console.log('refreshToken',refreshToken)
+//     //    if(!refreshToken)  return res.status(401).json('You are not authenticated')
+//     //    if(!refreshTokens.includes(refreshToken)){
+//     //     return res.status(403).json("Refresh token is not valid")
+//     //    }
+//        jwt.verify(refreshToken, process.env.JWT_REFRESH_KEY, function (err, user) {
+//         if (err) {
+//             return res.status(404).json('Token is invalid')
+//             // console.log(err)
+//         }
+//         // refreshTokens = refreshTokens.filter((token)=>token !==refreshToken)
+//         // const newAccessToken= generateRefreshToken(user)
+//         const newAccessToken=generateAccessToken(user)
+//         const newRefreshToken=generateRefreshToken(user)
+//         // refreshTokens.push(newRefreshToken)
         
-        // res.cookie('token', newAccessToken, {
-        //     // httpOnly: true,
-        //     // secure: true,
-        //     // sameSite: 'strict',
-        //     path: '/',
-        //     sameSite: false,
-        // })
-        // res.cookie( 'token', newAccessToken,{ maxAge: 1000 * 60 * 10, httpOnly: false });
+//         // res.cookie('token', newAccessToken, {
+//         //     // httpOnly: true,
+//         //     // secure: true,
+//         //     // sameSite: 'strict',
+//         //     path: '/',
+//         //     sameSite: false,
+//         // })
+//         // res.cookie( 'token', newAccessToken,{ maxAge: 1000 * 60 * 10, httpOnly: false });
 
 
-        // res.cookie('refreshToken', newRefreshToken, {
-        //     // httpOnly: true,
-        //     // secure: true,
-        //     // sameSite: 'strict',
-        //     // path: '/',
-        //     sameSite: false,
-        // })
+//         // res.cookie('refreshToken', newRefreshToken, {
+//         //     // httpOnly: true,
+//         //     // secure: true,
+//         //     // sameSite: 'strict',
+//         //     // path: '/',
+//         //     sameSite: false,
+//         // })
       
-        // res.cookie( 'refreshToken', newRefreshToken,{ maxAge: 1000 * 60 * 10, httpOnly: false });
+//         // res.cookie( 'refreshToken', newRefreshToken,{ maxAge: 1000 * 60 * 10, httpOnly: false });
 
-        return res.status(200).json({
-            status: 'OK',
-            message: 'SUCCESS',
-            accessToken:newAccessToken,
-            refreshToken:newRefreshToken
-        })
-        // console.log(user)
-        // {
-        //     id: '64e5c73c63068380d6576094',
-        //     isAdmin: false,
-        //     iat: 1692789058,
-        //     exp: 1692789118
-        //   }
+//         return res.status(200).json({
+//             status: 'OK',
+//             message: 'SUCCESS',
+//             accessToken:newAccessToken,
+//             refreshToken:newRefreshToken
+//         })
+//         // console.log(user)
+//         // {
+//         //     id: '64e5c73c63068380d6576094',
+//         //     isAdmin: false,
+//         //     iat: 1692789058,
+//         //     exp: 1692789118
+//         //   }
 
       
-    });
+//     });
 
-    } catch (e) {
-        return res.status(404).json({
-            message: e
-        })
-    }
-}
+//     } catch (e) {
+//         return res.status(404).json({
+//             message: e
+//         })
+//     }
+// }
 
 
 export const logoutUser = async (req, res) => {
