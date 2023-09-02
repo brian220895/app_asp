@@ -22,7 +22,7 @@ app.use(express.json({ limit: '30mb' }));
 app.use(express.urlencoded({ extended: true, limit: '30mb' }));
 
 app.use("*",cors({
-  origin:false,
+  origin:true,
   credentials:true
 }))
 app.use(cookieParser('anonystick'));
@@ -32,7 +32,7 @@ routers(app)
 
 
 app.get('/setcookie', (req, res)=> {
-    res.cookie('sitesSecurity', 'anonystick.com', {sameSite: "none",signed: true})
+    res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
     res.json({ok: 1})
     // cookies.set('myCat', 'Pacman', { domain:thegioimauxanh.com,sameSite: "none", path: '/' });
     // // console.log(cookies.get('myCat222'));
