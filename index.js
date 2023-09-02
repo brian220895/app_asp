@@ -34,7 +34,7 @@ routers(app)
 app.get('/setcookie', (req, res)=> {
     res.cookie('sitesSecurity', 'anonystick.com', { httpOnly: true, sameSite: 'none', secure: true,
     domain: 'thegioimauxanh.com'})
-    res.json({ok: 1})
+    res.json({ok: 3333})
     // cookies.set('myCat', 'Pacman', { domain:thegioimauxanh.com,sameSite: "none", path: '/' });
     // // console.log(cookies.get('myCat222'));
 })
