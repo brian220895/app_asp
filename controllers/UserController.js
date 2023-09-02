@@ -156,7 +156,7 @@ export const generateAccessToken=(checkUser)=>{
     return jwt.sign({
         id:checkUser.id,
         isAdmin:checkUser.isAdmin,
-    }, process.env.JWT_ACCESS_KEY, { expiresIn: '10s' })
+    }, process.env.JWT_ACCESS_KEY, { expiresIn: '35s' })
 }
 
 export const generateRefreshToken=(checkUser)=>{
@@ -168,32 +168,32 @@ export const generateRefreshToken=(checkUser)=>{
 
 export const loginUser = async (req, res) => {
     try {
-        //   const { username, password } = req.body
+          const { username, password } = req.body
      
-        // if (!username || !password) {
-        //     return res.status(404).json({
-        //         status: 'ERR',
-        //         message: 'The input is required'
-        //     })
-        // }
+        if (!username || !password) {
+            return res.status(404).json({
+                status: 'ERR',
+                message: 'The input is required'
+            })
+        }
 
-        //     const checkUser = await userModel.findOne({
-        //         username: username
-        //     })
-        //     if (!checkUser) {
-        //         return res.status(404).json({
-        //             status: 'ERR',
-        //             message: 'The user is not defined'
-        //         })
-        //     }
-        //     const comparePassword = bcrypt.compareSync(password, checkUser.password)
+            const checkUser = await userModel.findOne({
+                username: username
+            })
+            if (!checkUser) {
+                return res.status(404).json({
+                    status: 'ERR',
+                    message: 'The user is not defined'
+                })
+            }
+            const comparePassword = bcrypt.compareSync(password, checkUser.password)
 
-        //     if (!comparePassword) {
-        //         return res.status(404).json({
-        //             status: 'ERR',
-        //             message: 'The password or user is incorrect'
-        //         })
-        //     }
+            if (!comparePassword) {
+                return res.status(404).json({
+                    status: 'ERR',
+                    message: 'The password or user is incorrect'
+                })
+            }
 
             // const access_token = await genneralAccessToken({
             //     id: checkUser.id,
@@ -202,63 +202,34 @@ export const loginUser = async (req, res) => {
          
             
      
-            // if(checkUser && comparePassword){
-            //   const accessToken = generateAccessToken(checkUser)
-            //   const refreshToken = generateRefreshToken(checkUser)
-
-            //   res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
-            //  return res.json()
-
-            // response.cookie('cookie2', 'value2', { sameSite: 'none', secure: true });
-          
+            if(checkUser && comparePassword){
+              const accessToken = generateAccessToken(checkUser)
+              const refreshToken = generateRefreshToken(checkUser)
+ 
             //   res.cookie("token", accessToken, {
-            //     // httpOnly: true,
-            //     // secure:true,
+            //     httpOnly: true,
+            //     secure:true,
             //     // path: "/",
-            //     // sameSite: "strict",
-            //     sameSite: "none",
+            //     sameSite: "strict",
             //   });
-             cookies.set('myCat', 'Pacman', { domain:thegioimauxanh.com,sameSite: "none", path: '/' });
-  console.log(cookies.get('myCat222')); // Pacman
-            // res.cookie("token", accessToken, {
-            //     // httpOnly: true,
-            //     sameSite: "none",
-            //     secure: true,
-            //     // maxAge: 24 * 60 * 60 * 1000, // 1 day
-            //     maxAge: 3 * 60 * 1000,
-          
-            //     path: "/home",
-            //   });
-        
-             
+      
+     
+            
             //   res.cookie("refreshToken", refreshToken, {
-            //     // httpOnly: true,
-            //     // secure:true,
+            //     httpOnly: true,
+            //     secure:true,
             //     // path: "/",
-            //     // sameSite: "strict",
-            //     // sameSite: false,
+            //     sameSite: "strict",
             //   });
-            //   res.send();
-            // res.send();
-            // res.cookie("refreshToken", refreshToken, {
-            //     // httpOnly: true,
-            //     sameSite: "none",
-            //     secure: true,
-            //     // maxAge: 24 * 60 * 60 * 1000, // 1 day
-            //     maxAge: 3 * 60 * 1000,
-          
-            //     path: "/home",
-            //   });
-            // res.send();
-            //   const {password,...others}=checkUser._doc
-            //   // console.log(checkUser._doc)
-            //   return res.status(200).json({
-            //       status: 'OK',
-            //       message: 'SUCCESS',
-            //       accessToken,
-            //       ...others
-            //   })
-            // }
+              const {password,...others}=checkUser._doc
+              // console.log(checkUser._doc)
+              return res.status(200).json({
+                  status: 'OK',
+                  message: 'SUCCESS',
+                  accessToken,
+                  ...others
+              })
+            }
              
   
               
@@ -298,7 +269,7 @@ export const loginUser = async (req, res) => {
         //     path: '/',
         //     sameSite: false,
         // })
-        res.cookie( 'token', newAccessToken,{ maxAge: 1000 * 60 * 10, httpOnly: false });
+        // res.cookie( 'token', newAccessToken,{ maxAge: 1000 * 60 * 10, httpOnly: false });
 
 
         // res.cookie('refreshToken', newRefreshToken, {
@@ -309,7 +280,7 @@ export const loginUser = async (req, res) => {
         //     sameSite: false,
         // })
       
-        res.cookie( 'refreshToken', newRefreshToken,{ maxAge: 1000 * 60 * 10, httpOnly: false });
+        // res.cookie( 'refreshToken', newRefreshToken,{ maxAge: 1000 * 60 * 10, httpOnly: false });
 
         return res.status(200).json({
             status: 'OK',

@@ -9,7 +9,7 @@ import * as UserController from "../controllers/UserController.js";
 
 
 
-router.get('/',UserController.getAllUser)
+router.get('/',verifyMiddleWare,UserController.getAllUser)
 
 router.post('/', UserController.createUser)
 
@@ -21,7 +21,7 @@ router.delete('/delete/:_id',authUserMiddleWare,UserController.deleteUser)
 
 router.get('/getdetail/:_id', UserController.getDetailUser)
 
-router.get('/login', UserController.loginUser)
+router.post('/login', UserController.loginUser)
 
 router.post('/refresh', UserController.requestRefreshToken)
 
