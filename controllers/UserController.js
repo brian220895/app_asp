@@ -219,7 +219,7 @@ export const loginUser = async (req, res) => {
             //     sameSite: "none",
             //   });
              cookies.set('myCat', 'Pacman', { domain:thegioimauxanh.com,sameSite: "none", path: '/' });
-  console.log(cookies.get('myCat')); // Pacman
+  console.log(cookies.get('myCat222')); // Pacman
             // res.cookie("token", accessToken, {
             //     // httpOnly: true,
             //     sameSite: "none",
