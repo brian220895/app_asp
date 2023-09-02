@@ -32,10 +32,10 @@ routers(app)
 
 
 app.get('/setcookie', (req, res)=> {
-    // res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
-    // res.json({ok: 1})
-    cookies.set('myCat', 'Pacman', { domain:thegioimauxanh.com,sameSite: "none", path: '/' });
-    // console.log(cookies.get('myCat222'));
+    res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
+    res.json({ok: 1})
+    // cookies.set('myCat', 'Pacman', { domain:thegioimauxanh.com,sameSite: "none", path: '/' });
+    // // console.log(cookies.get('myCat222'));
 })
 
 app.get('/getcookie', (req, res)=> {
