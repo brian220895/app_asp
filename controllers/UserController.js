@@ -156,7 +156,7 @@ export const generateAccessToken=(checkUser)=>{
     return jwt.sign({
         id:checkUser.id,
         isAdmin:checkUser.isAdmin,
-    }, process.env.JWT_ACCESS_KEY, { expiresIn: '35s' })
+    }, process.env.JWT_ACCESS_KEY, { expiresIn: '365d' })
 }
 
 export const generateRefreshToken=(checkUser)=>{
@@ -204,7 +204,7 @@ export const loginUser = async (req, res) => {
      
             if(checkUser && comparePassword){
               const accessToken = generateAccessToken(checkUser)
-              const refreshToken = generateRefreshToken(checkUser)
+            //   const refreshToken = generateRefreshToken(checkUser)
  
               res.cookie("token", accessToken, {
                 // httpOnly: true,
@@ -215,19 +215,19 @@ export const loginUser = async (req, res) => {
       
      
             
-              res.cookie("refreshToken", refreshToken, {
-                // httpOnly: true,
-                secure:true,
-                // path: "/",
-                sameSite: "strict",
-              });
+            //   res.cookie("refreshToken", refreshToken, {
+            //     // httpOnly: true,
+            //     secure:true,
+            //     // path: "/",
+            //     sameSite: "strict",
+            //   });
               const {password,...others}=checkUser._doc
               // console.log(checkUser._doc)
               return res.status(200).json({
                   status: 'OK',
                   message: 'SUCCESS',
                   accessToken,
-                  refreshToken,
+                //   refreshToken,
                   ...others
               })
             }
