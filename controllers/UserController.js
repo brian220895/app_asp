@@ -206,27 +206,13 @@ export const loginUser = async (req, res) => {
               const accessToken = generateAccessToken(checkUser)
               const refreshToken = generateRefreshToken(checkUser)
  
-            //   res.cookie("token", accessToken, {
-            //     httpOnly: true,
-            //     secure:true,
-            //     // path: "/",
-            //     sameSite: "strict",
-            //   });
-      
-     
-            
-            //   res.cookie("refreshToken", refreshToken, {
-            //     httpOnly: true,
-            //     secure:true,
-            //     // path: "/",
-            //     sameSite: "strict",
-            //   });
               const {password,...others}=checkUser._doc
               // console.log(checkUser._doc)
               return res.status(200).json({
                   status: 'OK',
                   message: 'SUCCESS',
                   accessToken,
+                  refreshToken,
                   ...others
               })
             }
