@@ -207,7 +207,8 @@ export const loginUser = async (req, res) => {
             //   const refreshToken = generateRefreshToken(checkUser)
 
             //   res.cookie('sitesSecurity', 'anonystick.com', {signed: true})
-             return res.json()
+            //  return res.json()
+
             // response.cookie('cookie2', 'value2', { sameSite: 'none', secure: true });
           
             //   res.cookie("token", accessToken, {
@@ -217,7 +218,8 @@ export const loginUser = async (req, res) => {
             //     // sameSite: "strict",
             //     sameSite: "none",
             //   });
-
+             cookies.set('myCat', 'Pacman', { domain:thegioimauxanh.com,sameSite: "none", path: '/' });
+  console.log(cookies.get('myCat')); // Pacman
             // res.cookie("token", accessToken, {
             //     // httpOnly: true,
             //     sameSite: "none",
