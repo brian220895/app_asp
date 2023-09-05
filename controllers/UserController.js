@@ -294,28 +294,23 @@ export const generateRefreshToken=(checkUser)=>{
               const refreshToken = generateRefreshToken(checkUser)
 
               res.cookie("token",accessToken,{ 
-                //  httpOnly: true,
-                // secure: true,
-                // signed: true,
-                // maxAge: 1000 * 60 * 10,
-                // SameSite: 'none'
-                // maxAge: 24*60*60*1000, httpOnly: true, 
-                SameSite:"None",
-
-                maxAge: 86400000, httpOnly: true
+                 httpOnly: true,
+                secure: true,
+                signed: true,
+                maxAge: 1000 * 60 * 10,
+                SameSite: 'None',
+                maxAge: 24*60*60*1000,
 
             });
 
 
             res.cookie("refreshToken",refreshToken,{ 
-                //  httpOnly: true,
-                // secure: true,
-                // signed: true,
-                // maxAge: 1000 * 60 * 10,
-                // SameSite: 'none'
-                // maxAge: 24*60*60*1000, httpOnly: true, 
-               SameSite:"None",
-               maxAge: 86400000, httpOnly: true
+                httpOnly: true,
+                secure: true,
+                signed: true,
+                maxAge: 1000 * 60 * 10,
+                SameSite: 'None',
+                maxAge: 24*60*60*1000,
             });
 
             res.setHeader("Access-Control-Allow-Origin", "*");
