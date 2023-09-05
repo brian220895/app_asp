@@ -295,22 +295,22 @@ export const generateRefreshToken=(checkUser)=>{
 
               res.cookie("token",accessToken,{ 
                  httpOnly: true,
-                secure: true,
-                signed: true,
-                maxAge: 1000 * 60 * 10,
-                SameSite: 'None',
-                maxAge: 24*60*60*1000,
+                // secure: true,
+                // signed: true,
+                // maxAge: 1000 * 60 * 10,
+                // SameSite: 'None',
+                // maxAge: 24*60*60*1000,
 
             });
 
 
             res.cookie("refreshToken",refreshToken,{ 
                 httpOnly: true,
-                secure: true,
-                signed: true,
-                maxAge: 1000 * 60 * 10,
-                SameSite: 'None',
-                maxAge: 24*60*60*1000,
+                // secure: true,
+                // signed: true,
+                // maxAge: 1000 * 60 * 10,
+                // SameSite: 'None',
+                // maxAge: 24*60*60*1000,
             });
 
             res.setHeader("Access-Control-Allow-Origin", "*");
