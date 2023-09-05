@@ -312,9 +312,6 @@ export const generateRefreshToken=(checkUser)=>{
                 // SameSite: 'None',
                 // maxAge: 24*60*60*1000,
             });
-
-            res.setHeader("Access-Control-Allow-Origin", "*");
-            res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
           
             //   res.cookie("token", accessToken, {
             //     // httpOnly: true,
