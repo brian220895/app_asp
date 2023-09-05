@@ -12,19 +12,104 @@ var url =process.env.URI
 
 // app.use(cors());
 
+// app.use((req, res, next) => {
+//   // res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//   next();
+// }) 
+
+// const allowCrossDomain = (req, res, next) => {
+//   res.header(`Access-Control-Allow-Origin`, `localhost:3000`);
+//   res.header(`Access-Control-Allow-Methods`, `GET,PUT,POST,DELETE`);
+//   res.header(`Access-Control-Allow-Headers`, `Content-Type`);
+//   next();
+// };
+
+// app.use(
+  
+//   cors({
+//     allowedHeaders:"Content-Type",
+//     allowMethods:"GET,PUT,POST,DELETE",
+//     origin:"localhost:3000",
+// })
+
+// )
+
+
 // app.use(cookieParser('anonystick'));
 
 
+// app.use(cors({
+//   'allowedHeaders': ['sessionId', 'Content-Type'],
+//   'exposedHeaders': ['sessionId'],
+//   'origin': '',
+//   'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   'preflightContinue': true
+// }));
+
+
+var  corsOptions  = {
+  origin: 'http://localhost:3000', //frontend url
+  credentials: true}
+ 
+ 
+ app.use(cors(corsOptions));
 
 // app.use(express.cookieParser());
 app.use(cookieParser())
 app.use(express.json({ limit: '30mb' }));
 app.use(express.urlencoded({ extended: true, limit: '30mb' }));
 
-app.use("*",cors({
-  origin:true,
-  credentials:true
-}))
+// app.all('/*', function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//   next();
+// });
+
+
+
+
+
+// app.use(function(req,res,next){
+//   res.header("Access-Control-Allow-Credentials",true);
+//   res.header("Access-Control-Allow-Origin","localhost:3000");
+//   res.header(
+//     "Access-Control-Allow-Methods",
+//     "GET,PUT,POST,DELETE,UPDATE,OPTIONS"
+//   );
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "X-Request-With, X-HTTP-Method-Override, Content-Type, Accept"
+//   );
+//   next();
+// })
+
+
+
+
+
+
+
+
+// app.use((req, res, next) => {
+//   // res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//   next();
+// }) 
+
+// app.use(cors({ origin: true }));
+
+
+
+
+// app.use("*",cors({
+//   origin: "http://localhost:3000",
+//   methods: ["POST","GET", "POST", "PUT", "DELETE"],
+//   credentials: true,
+//   maxAge: 3600
+// }))
 
 routers(app)
 

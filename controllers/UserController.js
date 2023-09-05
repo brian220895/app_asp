@@ -10,6 +10,7 @@ let refreshTokens=[]
 
 export const createUser = async (req, res) => {
     try {
+       
         const { username, email, password, confirmPassword} = req.body
         const reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
         const isCheckEmail = reg.test(email)
@@ -166,7 +167,93 @@ export const generateRefreshToken=(checkUser)=>{
     }, process.env.JWT_REFRESH_KEY, { expiresIn: '365d' })
 }
 
-export const loginUser = async (req, res) => {
+// export const loginUser = async (req, res) => {
+//     try {
+
+//         console.log('loginasdasvsfgsdgds',req.body)
+//         //   const { username, password } = req.body
+//     //   console.log('req.body', req.body)
+//     //   console.log('password', password)
+//         // if (!username || !password) {
+//         //     return res.status(404).json({
+//         //         status: 'ERR',
+//         //         message: 'The input is required'
+//         //     })
+//         // }
+
+//         //     const checkUser = await userModel.findOne({
+//         //         username: username
+//         //     })
+//         //     if (!checkUser) {
+//         //         return res.status(404).json({
+//         //             status: 'ERR',
+//         //             message: 'The user is not defined'
+//         //         })
+//         //     }
+//         //     const comparePassword = bcrypt.compareSync(password, checkUser.password)
+
+//         //     if (!comparePassword) {
+//         //         return res.status(404).json({
+//         //             status: 'ERR',
+//         //             message: 'The password or user is incorrect'
+//         //         })
+//         //     }
+
+//             // const access_token = await genneralAccessToken({
+//             //     id: checkUser.id,
+//             //     isAdmin: checkUser.isAdmin
+//             // })
+         
+//         //   res.cookie( 'token', "sdfsdsdf",{ maxAge: 1000 * 60 * 10, httpOnly: false });
+      
+            
+     
+//             // if(checkUser && comparePassword){
+//             //   const accessToken = generateAccessToken(checkUser)
+//             //   const refreshToken = generateRefreshToken(checkUser)
+ 
+//             res.cookie("token","sdfdsfdsfsdf",{  httpOnly: true,
+//                 secure:true,
+//                 sameSite: "strict"
+//             });
+      
+     
+            
+//             //   res.cookie("refreshToken","refreshToken", {
+//                 // httpOnly: true,
+//                 // secure:true,
+//                 // path: "/",
+//                 // sameSite: "strict",
+//             //   });y
+//             //   const {password,...others}=checkUser._doc
+//             //   // console.log(checkUser._doc)
+//             //   return res.status(200).json({
+//             //       status: 'OK',
+//             //       message: 'SUCCESS',
+//             //       accessToken,
+//             //     //   refreshToken,
+//             //       ...others
+//             //   })
+//             // }
+             
+//             return res.status(200).json({
+//                 status: 'OK',
+//                 message: 'SUCCESS'
+//             })
+              
+              
+//       } catch (e) {
+//           return res.status(404).json({
+//               message: e
+//           })
+//       }
+//   }
+
+
+
+  
+
+  export const loginUser = async (req, res) => {
     try {
           const { username, password } = req.body
      
@@ -204,30 +291,40 @@ export const loginUser = async (req, res) => {
      
             if(checkUser && comparePassword){
               const accessToken = generateAccessToken(checkUser)
-            //   const refreshToken = generateRefreshToken(checkUser)
- 
-              res.cookie("token", accessToken, {
-                // httpOnly: true,
+              const refreshToken = generateRefreshToken(checkUser)
+
+              res.cookie("token",accessToken,{ 
+                //  httpOnly: true,
                 secure:true,
-                // path: "/",
-                sameSite: "strict",
-              });
-      
-     
-            
-            //   res.cookie("refreshToken", refreshToken, {
+                sameSite: "strict"
+            });
+
+            res.cookie("refreshToken",refreshToken,{ 
+                //  httpOnly: true,
+                secure:true,
+                sameSite: "strict"
+            });
+          
+            //   res.cookie("token", accessToken, {
             //     // httpOnly: true,
             //     secure:true,
-            //     // path: "/",
+            //     path: "/",
             //     sameSite: "strict",
             //   });
+
+            //   res.cookie("refreshToken", refreshToken, {
+            //     // httpOnly: true,
+            //     secure:false,
+            //     path: "/",
+            //     sameSite: "strict",
+            //   });
+         
               const {password,...others}=checkUser._doc
               // console.log(checkUser._doc)
               return res.status(200).json({
                   status: 'OK',
                   message: 'SUCCESS',
                   accessToken,
-                //   refreshToken,
                   ...others
               })
             }
@@ -241,6 +338,17 @@ export const loginUser = async (req, res) => {
           })
       }
   }
+
+
+
+
+
+
+
+
+
+
+
 
 
   export const requestRefreshToken =(req, res) => {
@@ -311,7 +419,7 @@ export const loginUser = async (req, res) => {
 export const logoutUser = async (req, res) => {
     try {
         res.clearCookie('token')
-        res.clearCookie('refreshToken')
+        // res.clearCookie('refreshToken')
         return res.status(200).json({
             status: 'OK',
             message: 'Logout successfully'
