@@ -50,7 +50,7 @@ var url =process.env.URI
 
 
 var  corsOptions  = {
-  origin: 'http://localhost:3000', //frontend url
+  origin: 'https://thegioimauxanh.com', //frontend url
   credentials: true}
  
  
