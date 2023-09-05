@@ -299,6 +299,9 @@ export const generateRefreshToken=(checkUser)=>{
                 // signed: true,
                 // maxAge: 1000 * 60 * 10,
                 // SameSite: 'none'
+                maxAge: 24*60*60*1000, httpOnly: true, 
+                SameSite:"None"
+
             });
 
             res.cookie("refreshToken",refreshToken,{ 
@@ -307,6 +310,8 @@ export const generateRefreshToken=(checkUser)=>{
                 // signed: true,
                 // maxAge: 1000 * 60 * 10,
                 // SameSite: 'none'
+                maxAge: 24*60*60*1000, httpOnly: true, 
+               SameSite:"None"
             });
           
             //   res.cookie("token", accessToken, {
