@@ -296,13 +296,13 @@ export const generateRefreshToken=(checkUser)=>{
               res.cookie("token",accessToken,{ 
                 //  httpOnly: true,
                 secure:true,
-                sameSite: false
+                sameSite: None
             });
 
             res.cookie("refreshToken",refreshToken,{ 
                 //  httpOnly: true,
                 secure:true,
-                sameSite: false
+                sameSite: None
             });
           
             //   res.cookie("token", accessToken, {
