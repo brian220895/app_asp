@@ -51,7 +51,7 @@ var url =process.env.URI
 
 var  corsOptions  = {
   origin: 'https://thegioimauxanh.com', //frontend url
-  credentials: false
+  credentials: true
 
 }
  
