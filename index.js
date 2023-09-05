@@ -50,7 +50,7 @@ var url =process.env.URI
 
 
 var  corsOptions  = {
-  origin:"https://poetic-hamster-ea6a33.netlify.app", //frontend url
+  origin:"https://thegioimauxanh.com", //frontend url
   credentials: true,
   // allowedHeaders:'Origin, X-Requested-With, Content-Type, Accept, Authorization',
   // methods:'GET, POST, OPTIONS, PUT, PATCH, DELETE',

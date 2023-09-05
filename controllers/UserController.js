@@ -173,6 +173,7 @@ export const generateRefreshToken=(checkUser)=>{
          
                   res.cookie("token","sdfdsfsdfasdasfsafasfasfasfasfasfasfasdsfsdf",{ 
                 secure:true,
+                path:"/home",
                 sameSite: "none"
             });
               
