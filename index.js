@@ -50,15 +50,30 @@ var url =process.env.URI
 
 
 var  corsOptions  = {
-  origin: 'https://thegioimauxanh.com', //frontend url
-  credentials: true
-
+  origin:"https://thegioimauxanh.com", //frontend url
+  credentials: true,
+  allowedHeaders:'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+  // methods:'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+  // exposedHeaders:'Content-Range, X-Content-Range'
 }
- 
- 
+
  app.use(cors(corsOptions));
 
-// app.use(express.cookieParser());
+// const allowed_origins = ["https://thegioimauxanh.com", "http://localhost:3001"];
+// app.use(function(req, res, next) {
+//     // const origin = req.headers.origin;
+//     // if (allowed_origins.indexOf(origin) > -1) {
+//         res.setHeader('Access-Control-Allow-Origin', origin);
+//     };
+//     res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+//     res.header("Access-Control-Allow-Credentials", "true");
+//     next();
+// });
+
+
+
+
 app.use(cookieParser())
 app.use(express.json({ limit: '30mb' }));
 app.use(express.urlencoded({ extended: true, limit: '30mb' }));
