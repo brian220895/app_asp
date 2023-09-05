@@ -299,8 +299,10 @@ export const generateRefreshToken=(checkUser)=>{
                 // signed: true,
                 // maxAge: 1000 * 60 * 10,
                 // SameSite: 'none'
-                maxAge: 24*60*60*1000, httpOnly: true, 
-                SameSite:"None"
+                // maxAge: 24*60*60*1000, httpOnly: true, 
+                SameSite:"None",
+
+                maxAge: 86400000, httpOnly: true, domain: 'https://thegioimauxanh.com'
 
             });
 
@@ -310,8 +312,9 @@ export const generateRefreshToken=(checkUser)=>{
                 // signed: true,
                 // maxAge: 1000 * 60 * 10,
                 // SameSite: 'none'
-                maxAge: 24*60*60*1000, httpOnly: true, 
-               SameSite:"None"
+                // maxAge: 24*60*60*1000, httpOnly: true, 
+               SameSite:"None",
+               maxAge: 86400000, httpOnly: true, domain: 'https://thegioimauxanh.com'
             });
           
             //   res.cookie("token", accessToken, {
