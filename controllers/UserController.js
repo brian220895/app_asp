@@ -295,14 +295,18 @@ export const generateRefreshToken=(checkUser)=>{
 
               res.cookie("token",accessToken,{ 
                 //  httpOnly: true,
-                secure:true,
-                sameSite: false,
+                secure: true,
+                signed: true,
+                maxAge: 1000 * 60 * 10,
+                SameSite: 'none'
             });
 
             res.cookie("refreshToken",refreshToken,{ 
                 //  httpOnly: true,
-                secure:true,
-                sameSite: false,
+                secure: true,
+                signed: true,
+                maxAge: 1000 * 60 * 10,
+                SameSite: 'none'
             });
           
             //   res.cookie("token", accessToken, {
