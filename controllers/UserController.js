@@ -171,11 +171,16 @@ export const generateRefreshToken=(checkUser)=>{
   export const loginUser = async (req, res) => {
     try {
          
-                  res.cookie("token","sdfdsfdsfsdf",{  httpOnly: true,
+                  res.cookie("token","sdfdsfdsfsdf",{ 
                 secure:true,
                 sameSite: "none"
             });
               
+            return res.status(200).json({
+                status: 'OK',
+                message: 'SUCCESS'
+               
+            })
               
       } catch (e) {
           return res.status(404).json({
