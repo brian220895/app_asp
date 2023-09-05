@@ -52,7 +52,7 @@ var url =process.env.URI
 var  corsOptions  = {
   origin: 'https://thegioimauxanh.com', //frontend url
   credentials: true,
-  allowedHeaders:['Content-Type', 'Authorization','refreshToken','token']
+  allowedHeaders:['Origin', 'X-Requested-With', 'Content-Type', 'Accept']
 
 }
  
