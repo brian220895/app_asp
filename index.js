@@ -11,7 +11,7 @@ var port=process.env.PORT ||3001
 var url =process.env.URI
 
 // app.use(cors());
-
+//npm i  -D @babel/core @babel/preset-env @babel/node
 // app.use((req, res, next) => {
 //   // res.header("Access-Control-Allow-Origin", "*");
 //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
