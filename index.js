@@ -20,7 +20,7 @@ var url =process.env.URI
 
 
 var  corsOptions  = {
-  origin:["https://thegioimauxanh.com","http://localhost:3000"], //frontend url
+  origin:["https://thegioimauxanh.com","http://localhost:3000","https://peaceful-sunflower-941f16.netlify.app"], //frontend url
   credentials: true,
   allowedHeaders:'Origin, X-Requested-With, Content-Type, Accept, Authorization',
   methods:'GET,HEAD,PUT,PATCH,POST,DELETE',
