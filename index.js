@@ -12,7 +12,7 @@ var url =process.env.URI
 
 
 var  corsOptions  = {
-  origin:'https://www.thegioimauxanh.com', //frontend url
+  origin:'https://thegioimauxanh.com', //frontend url
   credentials: true,
   allowedHeaders:'Origin, X-Requested-With, Content-Type, Accept, Authorization',
   methods:'GET,HEAD,PUT,PATCH,POST,DELETE',
