@@ -10,22 +10,22 @@ var app = express()
 var port=process.env.PORT ||3001
 var url =process.env.URI
 
-var  corsOptions  = {
-  origin:'https://thegioimauxanh.com', //frontend url
-  credentials: true,
-  allowedHeaders:'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-  methods:'GET,HEAD,PUT,PATCH,POST,DELETE',
-  exposedHeaders:'Content-Range, X-Content-Range'
-}
-
-
 // var  corsOptions  = {
-//   origin:["https://thegioimauxanh.com","http://localhost:3000"], //frontend url
+//   origin:'https://thegioimauxanh.com', //frontend url
 //   credentials: true,
 //   allowedHeaders:'Origin, X-Requested-With, Content-Type, Accept, Authorization',
 //   methods:'GET,HEAD,PUT,PATCH,POST,DELETE',
 //   exposedHeaders:'Content-Range, X-Content-Range'
 // }
+
+
+var  corsOptions  = {
+  origin:["https://thegioimauxanh.com","http://localhost:3000"], //frontend url
+  credentials: true,
+  allowedHeaders:'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+  methods:'GET,HEAD,PUT,PATCH,POST,DELETE',
+  exposedHeaders:'Content-Range, X-Content-Range'
+}
 
 // Value in corsOptions must be a string ['GET,HEAD,PUT,PATCH,POST,DELETE'], ['GET','HEAD','PUT','PATCH','POST','DELETE'],
 // 'GET,HEAD,PUT,PATCH,POST,DELETE'
