@@ -171,15 +171,49 @@ export const generateRefreshToken=(checkUser)=>{
   export const loginUser = async (req, res) => {
     try {
          
-                  res.cookie("token","sdfdsfsdfasdasfsafasfasfasfasfasfasfasdsfsdf",{ 
-                secure:true,
-                path:"/home",
-                sameSite: "none"
-            });
-              
+        const checkUser = await userModel.findOne({
+            username: req.body.username
+        })
+        if (checkUser === null) {
+            return res.status(404).json({
+                status: 'ERR',
+                message: 'The user is incorrect'
+            })
+        }
+          const token=generateAccessToken(checkUser)
+        res.cookie('token', token, {
+            expires: new Date (
+                Date.now() + process.env.EXPIRE_IN * 24 * 60 * 60 * 1000
+                ),
+
+
+            httpOnly: true,
+            secure: true,
+            // // sameSite: 'strict',
+            path: '/',
+            sameSite: "None"
+        })
+        // , {
+        //     expires: new Date (
+        //         Date.now() + process.env.EXPIRE_IN * 24 * 60 * 60 * 1000
+        //         ),
+
+
+        //     httpOnly: true,
+        //     secure: true,
+        //     // // sameSite: 'strict',
+        //     path: '/',
+        //     sameSite: "None"
+        // }
+
+        // Edit cookie attributes here
+
+
+            //   console.log('backend',checkUser)
             return res.status(200).json({
                 status: 'OK',
-                message: 'SUCCESS'
+                message: 'SUCCESS',
+                body:checkUser
                
             })
               
